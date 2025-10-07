@@ -2,6 +2,7 @@ let numPlayers = 0;
 let currentPlayer = 1;
 let playersData = [];
 
+// DOM elements
 const setupDiv = document.getElementById("setup");
 const shareDiv = document.getElementById("shareLink");
 const gameLinkInput = document.getElementById("gameLink");
@@ -12,14 +13,14 @@ const storyContainer = document.getElementById("storyContainer");
 const storyEl = document.getElementById("story");
 const restartBtn = document.getElementById("restart");
 
-document.getElementById("startGame").addEventListener("click", () => {
-    numPlayers = parseInt(document.getElementById("numPlayers").value);
+// Start game
+document.getElementById("startGame").addEventListener("click", function() {
+    numPlayers = parseInt(document.getElementById("numPlayers").value, 10);
     if (isNaN(numPlayers) || numPlayers < 2) {
         alert("لطفاً یک عدد معتبر وارد کنید (حداقل 2 نفر).");
         return;
     }
 
-    // Generate a fake game link for sharing
     const gameID = Math.random().toString(36).substring(2, 8);
     gameLinkInput.value = `${window.location.href}?game=${gameID}`;
 
@@ -29,10 +30,11 @@ document.getElementById("startGame").addEventListener("click", () => {
     playerNumSpan.textContent = currentPlayer;
 });
 
-madlibForm.addEventListener("submit", (e) => {
+// Handle player form submission
+madlibForm.addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const data = {
+    const playerData = {
         name: document.getElementById("name").value,
         food: document.getElementById("food").value,
         animal: document.getElementById("animal").value,
@@ -45,37 +47,40 @@ madlibForm.addEventListener("submit", (e) => {
         exclamation: document.getElementById("exclamation").value
     };
 
-    playersData.push(data);
+    playersData.push(playerData);
 
     if (currentPlayer < numPlayers) {
         currentPlayer++;
         playerNumSpan.textContent = currentPlayer;
         madlibForm.reset();
     } else {
-        showStory();
+        displayStory();
     }
 });
 
-function showStory() {
+// Display the collaborative story
+function displayStory() {
     playerFormDiv.classList.add("hidden");
     shareDiv.classList.add("hidden");
     storyContainer.classList.remove("hidden");
 
     let storyText = "این داستان گروهی شماست:\n\n";
 
-    playersData.forEach((p, index) => {
-        storyText += `${index+1}. ${p.name} تصمیم گرفت به ${p.place} برود و ${p.food} بخرد. ناگهان یک ${p.animal} ${p.action} کرد و ${p.sillyObject} را برداشت! ${p.name} با حالت ${p.emotion} گفت: "${p.sound}!" و ${p.friend} به کمک آمد. همه با هم گفتند: "${p.exclamation}"\n\n`;
+    playersData.forEach((p, idx) => {
+        storyText += `${idx+1}. یک روز ${p.name} با حالتی ${p.emotion} تصمیم گرفت به ${p.place} برود و ${p.food} بخرد. ناگهان یک ${p.animal} با سرعت ${p.action} کرد و ${p.sillyObject} را برداشت! ${p.name} جیغ کشید: "${p.sound}!" و ${p.friend} با خنده دوید دنبال آن. همه با هم گفتند: "${p.exclamation}" 😂\n\n`;
     });
 
-    storyEl.textContent = storyText;
+    storyEl.textContent = storyText.trim();
 }
 
-restartBtn.addEventListener("click", () => {
+// Restart the game
+restartBtn.addEventListener("click", function() {
     numPlayers = 0;
     currentPlayer = 1;
     playersData = [];
     madlibForm.reset();
     setupDiv.classList.remove("hidden");
-    storyContainer.classList.add("hidden");
+    playerFormDiv.classList.add("hidden");
     shareDiv.classList.add("hidden");
+    storyContainer.classList.add("hidden");
 });
