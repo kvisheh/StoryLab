@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     let numPlayers = 0;
     let currentPlayer = 1;
     let playersData = [];
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const startBtn = document.getElementById("startGame");
 
     // Start game
-    startBtn.addEventListener("click", function() {
+    startBtn.addEventListener("click", function () {
         const inputValue = document.getElementById("numPlayers").value;
         numPlayers = parseInt(inputValue, 10);
 
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Handle player form submission
-    madlibForm.addEventListener("submit", function(e) {
+    madlibForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
         const playerData = {
@@ -67,22 +67,21 @@ document.addEventListener("DOMContentLoaded", function() {
         shareDiv.classList.add("hidden");
         storyContainer.classList.remove("hidden");
 
-        // Shuffle players so each placeholder uses different player input
-        const shuffled = playersData.slice().sort(() => 0.5 - Math.random());
+        // Cycle through players for each placeholder
+        const getPlayer = (index) => playersData[index % playersData.length];
 
-        // Build story using different players for different parts
         const story = `
-یک روز ${shuffled[0].name} با حالتی ${shuffled[1].emotion} تصمیم گرفت به ${shuffled[2 % shuffled.length].place} برود و ${shuffled[0].food} بخرد. 
-ناگهان یک ${shuffled[1].animal} شروع به ${shuffled[2 % shuffled.length].action} کرد و ${shuffled[0].sillyObject} را برداشت! 
-${shuffled[0].name} جیغ کشید: "${shuffled[1].sound}!" و ${shuffled[2 % shuffled.length].friend} با خنده دوید دنبال آن. 
-همه با هم گفتند: "${shuffled[1].exclamation}" 😂
+یک روز ${getPlayer(0).name} با حالتی ${getPlayer(1).emotion} تصمیم گرفت به ${getPlayer(2).place} برود و ${getPlayer(0).food} بخرد. 
+ناگهان یک ${getPlayer(1).animal} شروع به ${getPlayer(2).action} کردن کرد و ${getPlayer(0).sillyObject} را برداشت! 
+${getPlayer(0).name} جیغ کشید: "${getPlayer(1).sound}!" و ${getPlayer(2).friend} با خنده دوید دنبال آن. 
+همه با هم گفتند: "${getPlayer(0).exclamation}" 😂
         `.trim();
 
         storyEl.textContent = story;
     }
 
     // Restart the game
-    restartBtn.addEventListener("click", function() {
+    restartBtn.addEventListener("click", function () {
         numPlayers = 0;
         currentPlayer = 1;
         playersData = [];
