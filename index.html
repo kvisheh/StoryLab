@@ -1,41 +1,65 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>استوری‌فیس - داستان شخصی شما</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بازی گروهی استوری‌فیس</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>🌟 استوری‌فیس 🌟</h1>
-    <p>عکست را آپلود کن، فرم را پر کن و در داستان خودت بازی کن!</p>
+    <h1>🌟 بازی گروهی استوری‌فیس 🌟</h1>
 
-    <form id="madlib-form">
-      <label>عکس خودت را آپلود کن:</label>
-      <input type="file" id="avatar" accept="image/*" required />
+    <div id="setup">
+      <label>چند نفر در بازی شرکت می‌کنند؟</label>
+      <input type="number" id="numPlayers" min="2" max="10" placeholder="مثلاً 3">
+      <button id="startGame">شروع بازی</button>
+    </div>
 
-      <label>نام شما:</label>
-      <input type="text" id="name" placeholder="مثلاً سارا" required />
+    <div id="shareLink" class="hidden">
+      <p>این لینک را در گروه واتساپ خود به اشتراک بگذارید تا همه شرکت کنند:</p>
+      <input type="text" id="gameLink" readonly>
+    </div>
 
-      <label>غذای مورد علاقه:</label>
-      <input type="text" id="food" placeholder="مثلاً قرمه‌سبزی" required />
+    <div id="playerForm" class="hidden">
+      <h2>فرم بازیکن <span id="playerNum"></span></h2>
+      <form id="madlib-form">
+        <label>نام شما:</label>
+        <input type="text" id="name" required>
 
-      <label>حیوان:</label>
-      <input type="text" id="animal" placeholder="مثلاً گربه" required />
+        <label>غذای مورد علاقه:</label>
+        <input type="text" id="food" required>
 
-      <label>حالت احساسی:</label>
-      <input type="text" id="emotion" placeholder="مثلاً هیجان‌زده" required />
+        <label>حیوان:</label>
+        <input type="text" id="animal" required>
 
-      <label>یک صدای بامزه:</label>
-      <input type="text" id="sound" placeholder="مثلاً بوم!" required />
+        <label>حالت احساسی:</label>
+        <input type="text" id="emotion" required>
 
-      <button type="submit">داستان من را بساز</button>
-    </form>
+        <label>یک صدای بامزه:</label>
+        <input type="text" id="sound" required>
 
-    <div id="story-container" class="hidden">
-      <h2>🎬 داستان شما</h2>
-      <img id="avatar-preview" src="" alt="آواتار شما" />
+        <label>کجا اتفاق بیفتد؟</label>
+        <input type="text" id="place" required>
+
+        <label>چیزی عجیب و بامزه:</label>
+        <input type="text" id="sillyObject" required>
+
+        <label>کاری عجیب انجام بدهد:</label>
+        <input type="text" id="action" required>
+
+        <label>نام دوست یا همراه:</label>
+        <input type="text" id="friend" required>
+
+        <label>یک عبارت یا شعار بامزه:</label>
+        <input type="text" id="exclamation" required>
+
+        <button type="submit">ارسال فرم</button>
+      </form>
+    </div>
+
+    <div id="storyContainer" class="hidden">
+      <h2>🎬 داستان گروهی شما</h2>
       <p id="story"></p>
       <button id="restart">شروع دوباره</button>
     </div>
