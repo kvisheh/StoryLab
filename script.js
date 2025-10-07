@@ -67,10 +67,9 @@ document.addEventListener("DOMContentLoaded", function () {
         shareDiv.classList.add("hidden");
         storyContainer.classList.remove("hidden");
 
-        // Helper to cycle through players
         const getPlayer = (index) => playersData[index % playersData.length];
 
-        // Longer, fully collaborative story
+        // Longer collaborative story
         const story = `
 یک روز ${getPlayer(0).name} با حالتی ${getPlayer(1).emotion} تصمیم گرفت به ${getPlayer(2).place} برود و ${getPlayer(0).food} بخرد. 
 در مسیر، یک ${getPlayer(1).animal} ظاهر شد که شروع به ${getPlayer(2).action} کردن کرد و ${getPlayer(0).sillyObject} را برداشت! 
