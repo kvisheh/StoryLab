@@ -58,22 +58,27 @@ document.addEventListener("DOMContentLoaded", function() {
             playerNumSpan.textContent = currentPlayer;
             madlibForm.reset();
         } else {
-            displayStory();
+            generateSharedStory();
         }
     });
 
-    function displayStory() {
+    function generateSharedStory() {
         playerFormDiv.classList.add("hidden");
         shareDiv.classList.add("hidden");
         storyContainer.classList.remove("hidden");
 
-        let storyText = "این داستان گروهی شماست:\n\n";
+        // Shuffle players so each placeholder uses different player input
+        const shuffled = playersData.slice().sort(() => 0.5 - Math.random());
 
-        playersData.forEach((p, idx) => {
-            storyText += `${idx+1}. یک روز ${p.name} با حالتی ${p.emotion} تصمیم گرفت به ${p.place} برود و ${p.food} بخرد. ناگهان یک ${p.animal} با سرعت ${p.action} کرد و ${p.sillyObject} را برداشت! ${p.name} جیغ کشید: "${p.sound}!" و ${p.friend} با خنده دوید دنبال آن. همه با هم گفتند: "${p.exclamation}" 😂\n\n`;
-        });
+        // Build story using different players for different parts
+        const story = `
+یک روز ${shuffled[0].name} با حالتی ${shuffled[1].emotion} تصمیم گرفت به ${shuffled[2 % shuffled.length].place} برود و ${shuffled[0].food} بخرد. 
+ناگهان یک ${shuffled[1].animal} شروع به ${shuffled[2 % shuffled.length].action} کرد و ${shuffled[0].sillyObject} را برداشت! 
+${shuffled[0].name} جیغ کشید: "${shuffled[1].sound}!" و ${shuffled[2 % shuffled.length].friend} با خنده دوید دنبال آن. 
+همه با هم گفتند: "${shuffled[1].exclamation}" 😂
+        `.trim();
 
-        storyEl.textContent = storyText.trim();
+        storyEl.textContent = story;
     }
 
     // Restart the game
