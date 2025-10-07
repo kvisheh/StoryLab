@@ -58,23 +58,27 @@ document.addEventListener("DOMContentLoaded", function () {
             playerNumSpan.textContent = currentPlayer;
             madlibForm.reset();
         } else {
-            generateSharedStory();
+            generateCollaborativeStory();
         }
     });
 
-    function generateSharedStory() {
+    function generateCollaborativeStory() {
         playerFormDiv.classList.add("hidden");
         shareDiv.classList.add("hidden");
         storyContainer.classList.remove("hidden");
 
-        // Cycle through players for each placeholder
+        // Helper to cycle through players
         const getPlayer = (index) => playersData[index % playersData.length];
 
+        // Longer, fully collaborative story
         const story = `
 یک روز ${getPlayer(0).name} با حالتی ${getPlayer(1).emotion} تصمیم گرفت به ${getPlayer(2).place} برود و ${getPlayer(0).food} بخرد. 
-ناگهان یک ${getPlayer(1).animal} شروع به ${getPlayer(2).action} کردن کرد و ${getPlayer(0).sillyObject} را برداشت! 
+در مسیر، یک ${getPlayer(1).animal} ظاهر شد که شروع به ${getPlayer(2).action} کردن کرد و ${getPlayer(0).sillyObject} را برداشت! 
 ${getPlayer(0).name} جیغ کشید: "${getPlayer(1).sound}!" و ${getPlayer(2).friend} با خنده دوید دنبال آن. 
-همه با هم گفتند: "${getPlayer(0).exclamation}" 😂
+
+ناگهان ${getPlayer(1).name} تصمیم گرفت کاری عجیب انجام دهد: ${getPlayer(2).action} کردن با ${getPlayer(0).sillyObject} در ${getPlayer(1).place}! 
+همه با هم خندیدند و گفتند: "${getPlayer(2).exclamation}" 😂
+در پایان، ${getPlayer(0).name} و ${getPlayer(1).friend} با هم ${getPlayer(2).action} کردند و یک روز کاملاً دیوانه‌وار را به پایان رساندند.
         `.trim();
 
         storyEl.textContent = story;
