@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>استوری‌فیس - داستان شخصی شما</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🌟 استوری‌فیس 🌟</h1>
+    <p>عکست را آپلود کن، فرم را پر کن و در داستان خودت بازی کن!</p>
+
+    <form id="madlib-form">
+      <label>عکس خودت را آپلود کن:</label>
+      <input type="file" id="avatar" accept="image/*" required />
+
+      <label>نام شما:</label>
+      <input type="text" id="name" placeholder="مثلاً سارا" required />
+
+      <label>غذای مورد علاقه:</label>
+      <input type="text" id="food" placeholder="مثلاً قرمه‌سبزی" required />
+
+      <label>حیوان:</label>
+      <input type="text" id="animal" placeholder="مثلاً گربه" required />
+
+      <label>حالت احساسی:</label>
+      <input type="text" id="emotion" placeholder="مثلاً هیجان‌زده" required />
+
+      <label>یک صدای بامزه:</label>
+      <input type="text" id="sound" placeholder="مثلاً بوم!" required />
+
+      <button type="submit">داستان من را بساز</button>
+    </form>
+
+    <div id="story-container" class="hidden">
+      <h2>🎬 داستان شما</h2>
+      <img id="avatar-preview" src="" alt="آواتار شما" />
+      <p id="story"></p>
+      <button id="restart">شروع دوباره</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
